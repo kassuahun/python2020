@@ -1,0 +1,43 @@
+installing both for node and master
+
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+sudo apt-get update 
+sudo apt-get install apt-transport-https
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list 
+echo "deb https://artifacts.elastic.co/packages/oss-7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list 
+sudo apt-get update 
+sudo apt-get install elasticsearch
+
+
+in case of node																in case of master
+
+rm -rf /etc/elasticsearch/elasticsearch.yml                           		rm -rf /etc/elasticsearch/elasticsearch.yml
+git clone https://github.com/samitshrestha/elasticsearch.git           		git clone https://github.com/samitshrestha/elasticsearchMaster.git 
+mv elasticsearch/elasticsearch.yml /etc/elasticsearch/					    mv elasticsearchMaster/elasticsearch.yml 	/etc/elasticsearch/								
+
+
+sudo systemctl start elasticsearch
+
+
+Only install in master
+
+sudo apt-get install -y default-jre
+sudo apt-get install metricbeat
+sudo systemctl start metricbeat
+sudo apt-get install logstash
+
+git clone https://github.com/samitshrestha/apache-01.git
+mv apache-01/apache-01.conf /etc/logstash/conf.d/
+sudo systemctl start logstash
+
+sudo apt-get install kibana
+rm /etc/kibana/kibana.yml
+git clone https://github.com/samitshrestha/kibanaFile.git
+mv kibanaFile/kibana.yml /etc/kibana/
+sudo systemctl start kibana
+
+
+
+Request URL: 
+https://mediastream.mediasite-svc.uninett.no/MediasiteDeliver/hioa/ba7fa16d-3e1c-41b0-9c21-83e4a65e622c.mp4/QualityLevels(3215000)/Fragments(video=40500000,format=isoff,segmentLength=6)
+
